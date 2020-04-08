@@ -23,13 +23,15 @@ class ActionController extends AbstractController{
     {
         try {
         
-        $login = filter_var(substr(trim($request->request->get('login')),0,10), FILTER_VALIDATE_EMAIL);
-        $pass = substr(trim($request->request->get('pass')),0,10);
+        $login = filter_var(substr(trim($request->request->get('login')),0,50), FILTER_VALIDATE_EMAIL);
+        $pass = substr(trim($request->request->get('pass')),0,50);
         if (empty($login) || empty($pass)){
             throw new \Exception('Login or pass not valid');
         }
         
         var_dump($login);
+        
+        
         
         } catch (\Exception $e) {
           die($e->getMessage());   
