@@ -1,8 +1,8 @@
 <?php
 
-use Doctrine\ORM\Mapping as ORM;
-
 namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,6 +14,8 @@ namespace App\Entity;
  * Description of Entry
  *
  * @author valera261104
+ * 
+ * @ORM\Entity
  * 
  * @ORM\Table(name="entry")
  * 
