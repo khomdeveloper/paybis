@@ -21,6 +21,8 @@ class ActionController extends AbstractController{
    
     public function login(Request $request)
     {
+        try {
+        
         $login = filter_var(substr(trim($request->request->get('login')),0,10), FILTER_VALIDATE_EMAIL);
         $pass = substr(trim($request->request->get('pass')),0,10);
         if (empty($login) || empty($pass)){
@@ -28,6 +30,10 @@ class ActionController extends AbstractController{
         }
         
         var_dump($login);
+        
+        } catch (\Exception $e) {
+          die($e->getMessage());   
+        }
     }
     
 }
