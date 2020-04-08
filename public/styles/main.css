@@ -15,3 +15,12 @@ and open the template in the editor.
 .ac {
     text-align:center;
 }
+
+body {
+  
+height:100%;
+margin:0;
+padding:0;
+background-color:snowwhite;
+
+}
