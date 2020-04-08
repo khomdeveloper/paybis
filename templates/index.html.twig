@@ -3,17 +3,27 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link href="{{ asset('styles/main.css') }}" type="text/css" rel="stylesheet" />
+        {% endblock %}
     </head>
     <body>
         <section class="header">
-            <a href="/"><img src="{{ asset('images/logo.jpg') }}" width="100"/></a>
+            <a href="/" class="logo"><img src="{{ asset('images/logo.jpg') }}" width="100"/></a>
+            <div>
+                <a href="/">Homepage</a>
+                <a href="/login">Login</a>
+            </div>
         </section>
-        <section class="body">
-            
+        <section class="content">
+            <div>
+                
+            </div>
         </section>
         <section class="footer">
-            
+            <div>
+                &copy; 2017 Imprint
+            </div>
         </section>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
