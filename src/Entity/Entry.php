@@ -28,12 +28,12 @@ class Entry {
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    public $id;
     
      /**
      * @ORM\Column(type="string", length=100)
      */
-    private $title;
+    public $title;
     
   
     

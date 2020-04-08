@@ -12,13 +12,15 @@
             <div class="ac">
                 <a href="/" class="logo"><img src="{{ asset('images/logo.jpg') }}" width="100"/></a>
             </div>
-                <div class="ac">
-                    <a href="/">Homepage</a>&nbsp;|&nbsp;<a href="/login">Login</a>
-                </div>
+            <div class="ac">
+                <a href="/">Homepage</a>&nbsp;|&nbsp;<a href="/login">Login</a>
+            </div>
         </section>
         <section class="content">
             <div>
-
+                {% for key, value in list %}
+                    <div>{{ value->title }}</div>
+                {%  endfor %}
             </div>
         </section>
         <section class="footer">
