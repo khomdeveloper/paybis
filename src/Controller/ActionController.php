@@ -8,11 +8,20 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 /**
  * Description of ActionController
  *
  * @author valera261104
  */
-class ActionController {
-    //put your code here
+class ActionController extends AbstractController{
+   
+    public function login(Request $request)
+    {
+        var_dump($request);
+    }
+    
 }
