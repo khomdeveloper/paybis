@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Service\AuthService;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Description of ActionController
@@ -21,6 +22,10 @@ use App\Service\AuthService;
 class ActionController extends AbstractController {
 
     public function login(Request $request) {
+        
+        $session = new Session();
+        $session->start();
+        
         try {
 
             $login = filter_var(substr(trim($request->request->get('login')), 0, 50), FILTER_VALIDATE_EMAIL);
@@ -28,7 +33,7 @@ class ActionController extends AbstractController {
             if (empty($login) || empty($pass)) {
                 throw new \Exception('Login or pass not valid');
             }
-            $isAuthorized = (new AuthService($this->doctrine, $this->session))->check($login, $pass);
+            $isAuthorized = (new AuthService($this->doctrine, $session))->check($login, $pass);
             
             var_dump($isAuthorized);
             
