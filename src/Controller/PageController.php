@@ -22,7 +22,6 @@ class PageController extends AbstractController {
     }
 
     public function login() {
-
         return $this->render('login.html.twig');
     }
 
