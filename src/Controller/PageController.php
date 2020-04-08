@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -20,8 +22,13 @@ class PageController extends AbstractController {
     
     public function index()
     {
-        //return new Response('wtf');
-        
+        $product = $this
+                ->getDoctrine()
+                ->getRepository(Entry::class)
+                ->findAll();
+                
+        var_dump($product); 
+       
         return $this->render('index.html.twig');
     }
     
