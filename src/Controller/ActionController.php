@@ -11,7 +11,7 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use App\Service\AuthService;
 
 /**
  * Description of ActionController
@@ -29,7 +29,9 @@ class ActionController extends AbstractController {
                 throw new \Exception('Login or pass not valid');
             }
             
+            $isAuthorized = (new AuthService($this->doctrine, $this->session))->check($login, $pass);
             
+            var_dump($isAuthorized);
             
         } catch (\Exception $e) {
             die($e->getMessage());

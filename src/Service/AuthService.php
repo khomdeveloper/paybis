@@ -8,6 +8,9 @@
 
 namespace App\Service;
 
+use App\Entity\User;
+
+
 /**
  * Description of AuthService
  *
@@ -15,17 +18,24 @@ namespace App\Service;
  */
 class AuthService {
     
-    protected $entityManager;
+    protected $doctrine;
    
-    public function __construct($entityManager)
+    public function __construct($doctrine, SessionInterface $session)
     { 
-        $this->entityManager = $entityManager;  
+        $this->doctrine = $doctrine;  
     }
     
     public function check($login, $pass){
         
+        $result = $this->doctrine
+                ->getRepository(User::class)
+                ->findBy([
+                   'password' => sha1($pass),
+                    'email' => $login
+                ],[],1);
         
-        
+       var_dump($result);
+           
     }
     
 }

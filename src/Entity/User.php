@@ -33,13 +33,13 @@ class User {
      *
      * @ORM\Column(type="string")
      */
-    public $login;
+    public $email;
     
     /**
      *
      * @ORM\Column(type="string")
      */
-    public $pass;
+    public $password;
     
     
 }
