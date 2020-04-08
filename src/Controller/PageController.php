@@ -31,8 +31,7 @@ class PageController extends AbstractController {
             //$list['name'] 
         }*/
             
-        $data = (new EntryService($this
-                ->getDoctrine()->getEntityManager()))->getList(); 
+        $data = (new EntryService($this->getEntityManager()))->getList(); 
         
         var_dumop($data);
            
