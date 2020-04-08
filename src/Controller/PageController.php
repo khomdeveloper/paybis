@@ -18,9 +18,7 @@ class PageController extends AbstractController {
 
         try {
 
-            $data = (new EntryService($this->getDoctrine()->getManager()))->getList();
-
-            var_dump($data);
+            $list = (new EntryService($this->getDoctrine()->getManager()))->getList();
 
             return $this->render('index.html.twig', [
                         'list' => $list]);
