@@ -23,22 +23,24 @@ class PageController extends AbstractController {
     public function index()
     {
         
-        //try {
+        try {
             
-        $list = $this
+        $data = $this
                 ->getDoctrine()
                 ->getRepository(Entry::class)
                 ->findBy([],[
                     'date' => 'DESC'
-                ],3);
+                ], 3);
+        
+        var_dump($data);
            
         return $this->render('index.html.twig', ['list' => $list]);
-      /*  
+       
         } catch (\Throwable $e) {
             
             die($e->getMessage());
             
-        }*/
+        }
         
     }
     
