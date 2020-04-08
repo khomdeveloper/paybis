@@ -9,13 +9,14 @@ namespace App\Controller;
  */
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * Description of DefaultController
  *
  * @author valera261104
  */
-class PageController {
+class PageController extends AbstractController {
     
     public function index()
     {
