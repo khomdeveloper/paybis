@@ -17,9 +17,12 @@ class PageController extends AbstractController {
     public function index() {
 
         $list = (new EntryService($this->getDoctrine()->getManager()))->getList();
+        
+        var_dumo($list[0]);
+        
         return $this->render('index.html.twig', [
                     'list' => $list
-                ]);
+        ]);
     }
 
     public function login() {

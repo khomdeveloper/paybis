@@ -12,30 +12,28 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
 /**
  * Description of ActionController
  *
  * @author valera261104
  */
-class ActionController extends AbstractController{
-   
-    public function login(Request $request)
-    {
+class ActionController extends AbstractController {
+
+    public function login(Request $request) {
         try {
-        
-        $login = filter_var(substr(trim($request->request->get('login')),0,50), FILTER_VALIDATE_EMAIL);
-        $pass = substr(trim($request->request->get('pass')),0,50);
-        if (empty($login) || empty($pass)){
-            throw new \Exception('Login or pass not valid');
-        }
-        
-        var_dump($login);
-        
-        
-        
+
+            $login = filter_var(substr(trim($request->request->get('login')), 0, 50), FILTER_VALIDATE_EMAIL);
+            $pass = substr(trim($request->request->get('pass')), 0, 50);
+            if (empty($login) || empty($pass)) {
+                throw new \Exception('Login or pass not valid');
+            }
+            
+            
+            
         } catch (\Exception $e) {
-          die($e->getMessage());   
+            die($e->getMessage());
         }
     }
-    
+
 }
