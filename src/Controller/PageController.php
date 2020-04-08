@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity;
+use App\Entity\Entry;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
