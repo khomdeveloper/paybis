@@ -31,7 +31,11 @@ class PageController extends AbstractController {
             //$list['name'] 
         }*/
             
-        $data = (new EntryService($this->getDoctrine()->getManager()))->getList(); 
+        $em = $this->getDoctrine()->getManager();
+        
+        var_dump($em);
+            
+        $data = (new EntryService($em))->getList(); 
         
         var_dump($data);
            
