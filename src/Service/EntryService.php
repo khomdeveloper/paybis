@@ -15,11 +15,11 @@ namespace App\Service;
  */
 class EntryService {
     
-    protected $connection;
+    protected $entityManager;
    
     public function __constructor($entityManager)
     {
-        $this->connection = $entityManager->getConnection();  
+        $this->entityManager = $entityManager;  
     }
     
     public function getList($order = [], $start = [], $limit = []) {
@@ -30,9 +30,8 @@ class EntryService {
             ORDER BY `date`
             LIMIT 3
             ";
-        
-        $statement = $this->connection->prepare($sql);
-        return $statement->execute();
+        $em = $this->entityManager;
+        return $em->getConnection()->exec($sql);
         
     }
     

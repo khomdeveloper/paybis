@@ -32,8 +32,6 @@ class PageController extends AbstractController {
         }*/
             
         $em = $this->getDoctrine()->getManager();
-        
-        var_dump($em);
             
         $data = (new EntryService($em))->getList(); 
         
