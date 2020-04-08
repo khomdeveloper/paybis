@@ -2,6 +2,8 @@
 
 use Doctrine\ORM\Mapping as ORM;
 
+namespace App\Entity;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
