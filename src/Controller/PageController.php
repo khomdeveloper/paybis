@@ -18,7 +18,7 @@ class PageController extends AbstractController {
 
         $list = (new EntryService($this->getDoctrine()->getManager()))->getList();
         
-        var_dumo($list[0]);
+        var_dump($list[0]);
         
         return $this->render('index.html.twig', [
                     'list' => $list
