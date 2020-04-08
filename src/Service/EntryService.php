@@ -17,8 +17,8 @@ class EntryService {
     
     protected $entityManager;
    
-    public function __construct($em)
-    {
+    public function __construct($entityManager)
+    { 
         $this->entityManager = $entityManager;  
     }
     
