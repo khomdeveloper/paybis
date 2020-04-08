@@ -23,11 +23,13 @@ class ActionController extends AbstractController {
 
     public function login(Request $request) {
         
-        $session = new Session();
-        $session->start();
         
+ 
         try {
 
+            $session = new Session();
+        $session->start();
+            
             $login = filter_var(substr(trim($request->request->get('login')), 0, 50), FILTER_VALIDATE_EMAIL);
             $pass = substr(trim($request->request->get('pass')), 0, 50);
             if (empty($login) || empty($pass)) {
