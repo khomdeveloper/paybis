@@ -20,6 +20,8 @@ class EntryService {
     public function __constructor($entityManager)
     {
         
+        die('stop');
+        
         var_dump($entityManager);
         
         $this->entityManager = $entityManager;  
