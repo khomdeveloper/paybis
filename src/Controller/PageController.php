@@ -13,38 +13,39 @@ use App\Service\EntryService;
  * @author valera261104
  */
 class PageController extends AbstractController {
-    
-    public function index()
-    {
-        
+
+    public function index() {
+
         try {
+
+            /* $this
+              ->getDoctrine()
+              ->getRepository(Entry::class)
+              ->findBy([],[
+              'date' => 'DESC'
+              ], 3);
+
+              $list = [];
+              foreach ($records as $record) {
+              //$list['name']
+              } */
+
+            $em = $this->getDoctrine()->getManager();
+
+            $es = new EntryService($em);
             
-        /*$this
-                ->getDoctrine()
-                ->getRepository(Entry::class)
-                ->findBy([],[
-                    'date' => 'DESC'
-                ], 3);
-        
-        $list = [];
-        foreach ($records as $record) {
-            //$list['name'] 
-        }*/
-            
-        $em = $this->getDoctrine()->getManager();
-            
-        $data = (new EntryService($em))->getList(); 
-        
-        var_dump($data);
-           
-        return $this->render('index.html.twig', ['list' => $list]);
-       
+            var_dump($es);
+
+            $data = (new EntryService($em))->getList();
+
+            var_dump($data);
+
+            return $this->render('index.html.twig', [
+                        'list' => $list]);
         } catch (\Throwable $e) {
-            
+
             die($e->getMessage());
-            
         }
-        
     }
-    
+
 }
