@@ -18,7 +18,8 @@ class PageController extends AbstractController {
 
         $list = (new EntryService($this->getDoctrine()->getManager()))->getList();
         return $this->render('index.html.twig', [
-                    'list' => $list]);
+                    'list' => $list
+                ]);
     }
 
     public function login() {
