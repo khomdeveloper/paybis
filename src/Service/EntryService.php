@@ -30,8 +30,9 @@ class EntryService {
             ORDER BY `date`
             LIMIT 3
             ";
-        $em = $this->entityManager;
-        return $em->getConnection()->exec($sql);
+        $statement = $this->entityManager->getConnection()->prepare($sql);
+        $statement->execute();        
+        return $statement->fetchAll();
         
     }
     
