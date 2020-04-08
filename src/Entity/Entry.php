@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * 
  * @ORM\Entity
  * 
- * @RMM\Table(name="entry")
+ * @ORM\Table(name="entry")
  * 
  */
 class Entry {
