@@ -35,6 +35,7 @@ class Entry {
      */
     protected $title;
     
+    
   
     
 }
