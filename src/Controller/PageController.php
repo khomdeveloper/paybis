@@ -35,6 +35,8 @@ class PageController extends AbstractController {
             $es = new EntryService($em);
             
             var_dump($es);
+            
+            var_dump($em);
 
             $data = (new EntryService($em))->getList();
 

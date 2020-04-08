@@ -17,12 +17,12 @@ class EntryService {
     
     protected $entityManager;
    
-    public function __constructor($entityManager)
+    public function __constructor($em)
     {
         
         die('stop');
         
-        var_dump($entityManager);
+        var_dump($em);
         
         $this->entityManager = $entityManager;  
     }
