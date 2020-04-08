@@ -17,13 +17,8 @@ class EntryService {
     
     protected $entityManager;
    
-    public function __constructor($em)
+    public function __construct($em)
     {
-        
-        die('stop');
-        
-        var_dump($em);
-        
         $this->entityManager = $entityManager;  
     }
     
@@ -36,7 +31,6 @@ class EntryService {
             LIMIT 3
             ";
         $em = $this->entityManager;
-        var_dump($em);
         return $em->getConnection()->exec($sql);
         
     }

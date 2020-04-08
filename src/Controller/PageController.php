@@ -18,27 +18,7 @@ class PageController extends AbstractController {
 
         try {
 
-            /* $this
-              ->getDoctrine()
-              ->getRepository(Entry::class)
-              ->findBy([],[
-              'date' => 'DESC'
-              ], 3);
-
-              $list = [];
-              foreach ($records as $record) {
-              //$list['name']
-              } */
-
-            $em = $this->getDoctrine()->getManager();
-
-            $es = new EntryService($em);
-            
-            var_dump($es);
-            
-            var_dump($em);
-
-            $data = (new EntryService($em))->getList();
+            $data = (new EntryService($this->getDoctrine()->getManager()))->getList();
 
             var_dump($data);
 
