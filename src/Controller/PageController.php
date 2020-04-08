@@ -23,7 +23,7 @@ class PageController extends AbstractController {
     public function index()
     {
         
-        try {
+        //try {
             
         $list = $this
                 ->getDoctrine()
@@ -33,12 +33,12 @@ class PageController extends AbstractController {
                 ],3);
            
         return $this->render('index.html.twig', ['list' => $list]);
-        
+      /*  
         } catch (\Throwable $e) {
             
             die($e->getMessage());
             
-        }
+        }*/
         
     }
     
