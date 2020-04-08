@@ -10,5 +10,8 @@ and open the template in the editor.
 
 .logo {
   display:block;
-  float:left;
+}
+
+.ac {
+    text-align:center;
 }
