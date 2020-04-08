@@ -25,14 +25,12 @@ class PageController extends AbstractController {
         
         try {
             
-        $data = $this
+        $list = $this
                 ->getDoctrine()
                 ->getRepository(Entry::class)
                 ->findBy([],[
                     'id' => 'DESC'
                 ], 3);
-        
-        var_dump($data);
            
         return $this->render('index.html.twig', ['list' => $list]);
        
