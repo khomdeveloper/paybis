@@ -16,16 +16,14 @@ class PageController extends AbstractController {
 
     public function index() {
 
-        try {
+        $list = (new EntryService($this->getDoctrine()->getManager()))->getList();
+        return $this->render('index.html.twig', [
+                    'list' => $list]);
+    }
 
-            $list = (new EntryService($this->getDoctrine()->getManager()))->getList();
+    public function login() {
 
-            return $this->render('index.html.twig', [
-                        'list' => $list]);
-        } catch (\Throwable $e) {
-
-            die($e->getMessage());
-        }
+        return $this->render('login.html.twig');
     }
 
 }
