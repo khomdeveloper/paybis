@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 .logo {
-  display:block;
+    display:block;
 }
 
 .ac {
@@ -17,10 +17,16 @@ and open the template in the editor.
 }
 
 body {
-  
-height:100%;
-margin:0;
-padding:0;
-background-color:snowwhite;
 
+    height:100vh;
+    margin:0;
+    padding:0;
+    background-color:silver;
+
+}
+
+.footer .data{
+    border-top:1px solid black;
+    position:relative;
+    bottom:100%;
 }
