@@ -22,14 +22,13 @@ body {
     margin:0;
     padding:0;
     background-color:silver;
-    font-size:small;
-  
+ 
 }
 
 .footer .data{
     border-top:1px solid black;
-    position:relative;
+    position:absolute;
     bottom:0%;
     width:100%;
-    padding:10px;
+    padding-top:10px;
 }
