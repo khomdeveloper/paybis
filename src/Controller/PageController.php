@@ -15,11 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author valera261104
  */
-class DefaultController {
+class PageController {
     
     public function index()
     {
-      return new Response('OK');   
+        $this->render('index.html.twig');
     }
     
 }
