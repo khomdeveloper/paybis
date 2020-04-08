@@ -15,8 +15,6 @@ namespace App\Entity;
  *
  * @author valera261104
  * 
- * @ORM\Entity
- * 
  * @ORM\Table(name="entry")
  * 
  */
