@@ -22,14 +22,24 @@ class PageController extends AbstractController {
     
     public function index()
     {
+        
+        try {
+            
         $product = $this
                 ->getDoctrine()
                 ->getRepository(Entry::class)
                 ->findAll();
-                
+           
         var_dump($product); 
        
         return $this->render('index.html.twig');
+        
+        } catch (\Throwable $e) {
+            
+            die($e->getMessage());
+            
+        }
+        
     }
     
 }
