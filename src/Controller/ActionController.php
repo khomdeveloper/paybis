@@ -33,9 +33,7 @@ class ActionController extends AbstractController {
                 throw new \Exception('Login or pass not valid');
             }
             
-            var_dump($this->doctrine);
-            
-            $isAuthorized = (new AuthService($this->doctrine, $session))->check($login, $pass);
+            $isAuthorized = (new AuthService($this->getDoctrine(), $session))->check($login, $pass);
             
             var_dump($isAuthorized);
             
