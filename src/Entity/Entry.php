@@ -43,7 +43,7 @@ class Entry {
     
     
     /**
-     * @var type @ORM\column(type="datetime")
+     * @var type @ORM\column(type="string")
      */
     public $date;
     
