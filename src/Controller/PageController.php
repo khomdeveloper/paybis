@@ -20,7 +20,9 @@ class PageController extends AbstractController {
     
     public function index()
     {
-        $this->render('index.html.twig');
+        return $this->render('wtf');
+        
+        //return $this->render('templates/index.html.twig');
     }
     
 }
