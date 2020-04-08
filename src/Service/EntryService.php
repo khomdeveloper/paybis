@@ -31,6 +31,7 @@ class EntryService {
             LIMIT 3
             ";
         $em = $this->entityManager;
+        var_dump($em);
         return $em->getConnection()->exec($sql);
         
     }
