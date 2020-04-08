@@ -19,7 +19,11 @@
         <section class="content">
             <div>
                 {% for key, value in list %}
-                    <div>{{ value.title }}</div>
+                    <p>{{ value.date }}<b>
+                        {{ value.title }}
+                        </b></p>
+                        <div>{{  value.description|slice(0,100)~'...' }}</div>
+                        <p>Author: {{ value.id }}</p>
                 {%  endfor %}
             </div>
         </section>

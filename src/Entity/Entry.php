@@ -36,6 +36,16 @@ class Entry {
     public $title;
     
     
-  
+    /**
+     * @var type @ORM\column(type="string")
+     */
+    public $description;
     
+    
+    /**
+     * @var type @ORM\column(type="datetime")
+     */
+    public $date;
+    
+  
 }
