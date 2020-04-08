@@ -20,7 +20,7 @@ class AuthService {
     
     protected $doctrine;
    
-    public function __construct($doctrine, SessionInterface $session)
+    public function __construct($doctrine, $session)
     { 
         $this->doctrine = $doctrine;  
     }
