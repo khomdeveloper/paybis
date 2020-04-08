@@ -28,12 +28,11 @@ class ActionController extends AbstractController {
             if (empty($login) || empty($pass)) {
                 throw new \Exception('Login or pass not valid');
             }
-            
             $isAuthorized = (new AuthService($this->doctrine, $this->session))->check($login, $pass);
             
             var_dump($isAuthorized);
             
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             die($e->getMessage());
         }
     }
