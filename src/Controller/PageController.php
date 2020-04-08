@@ -3,15 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Entry;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\EntryService;
 
 /**
  * Description of DefaultController
@@ -25,12 +19,22 @@ class PageController extends AbstractController {
         
         try {
             
-        $list = $this
+        /*$this
                 ->getDoctrine()
                 ->getRepository(Entry::class)
                 ->findBy([],[
-                    'id' => 'DESC'
+                    'date' => 'DESC'
                 ], 3);
+        
+        $list = [];
+        foreach ($records as $record) {
+            //$list['name'] 
+        }*/
+            
+        $data = (new EntryService($this
+                ->getDoctrine()->getEntityManager()))->getList(); 
+        
+        var_dumop($data);
            
         return $this->render('index.html.twig', ['list' => $list]);
        
