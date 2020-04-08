@@ -31,10 +31,10 @@ class AuthService {
                 ->getRepository(User::class)
                 ->findBy([
                    'password' => sha1($pass),
-                    'email' => $login
+                   'email' => $login
                 ],[],1);
         
-       var_dump($result);
+       return !empty($result);
            
     }
     

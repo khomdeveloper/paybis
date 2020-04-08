@@ -35,7 +35,11 @@ class ActionController extends AbstractController {
             
             $isAuthorized = (new AuthService($this->getDoctrine(), $session))->check($login, $pass);
             
-            var_dump($isAuthorized);
+            if (!empty($isAuthorized)) {
+               $this->redirect('/');   
+            } else {
+                throw new \Exception('User not authorized');
+            }
             
         } catch (\Throwable $e) {
             die($e->getMessage());
