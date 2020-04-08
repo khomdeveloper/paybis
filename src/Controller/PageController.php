@@ -29,7 +29,7 @@ class PageController extends AbstractController {
                 ->getDoctrine()
                 ->getRepository(Entry::class)
                 ->findBy([],[
-                    'date' => 'DESC'
+                    'id' => 'DESC'
                 ], 3);
         
         var_dump($data);
