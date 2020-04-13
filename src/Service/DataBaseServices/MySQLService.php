@@ -25,6 +25,11 @@ class MySQLService implements DataBaseServiceInterface
         $stmt = $this->connection
             ->executeQuery($sql, $values, $types);
 
+        var_dump($stmt);
+
+
+        die('stop');
+
         return $stmt;
     }
 
