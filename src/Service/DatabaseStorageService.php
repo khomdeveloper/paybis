@@ -22,7 +22,7 @@ class DatabaseStorageService {
         $this->doctrine = $doctrine;
     }
 
-    public function getList()
+    public function getList($currencies = ['USD','EUR'])
     {
         try {
 
