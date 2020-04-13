@@ -8,6 +8,7 @@
 
 namespace App\Service;
 
+use App\Migrations\CreateExchangeRate;
 use App\Migrations\CreateRateSource;
 use App\Service\DataBaseServices\DataBaseServiceInterface;
 use Doctrine\DBAL\Connection;
@@ -44,7 +45,8 @@ class DatabaseStorageService {
                     'source_id' => \PDO::PARAM_STR
                 ],
                 [
-                    CreateRateSource::class
+                    CreateRateSource::class,
+                    CreateExchangeRate::class,
                 ]
             );
 
