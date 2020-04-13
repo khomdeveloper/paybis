@@ -28,7 +28,7 @@ class ApiController extends AbstractController {
 
             $mySQLservice = new MySQLService($this->getDoctrine());
 
-            var_dump($mySQLservice);
+
 
             //$dataBaseService = new DatabaseStorageService($this->getDoctrine());
 

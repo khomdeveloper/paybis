@@ -8,6 +8,8 @@
 
 namespace App\Service;
 
+use App\Migrations\CreateRateSource;
+use App\Service\DataBaseServices\DataBaseServiceInterface;
 use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,70 +20,57 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class DatabaseStorageService {
 
-    protected $doctrine;
+    protected $dataBaseService;
 
-    public function __construct(ManagerRegistry $doctrine)
+    public function __construct(DataBaseServiceInterface $dataBaseSerivce)
     {
-        $this->doctrine = $doctrine;
+        $this->dataBaseService = $dataBaseSerivce;
     }
 
     public function getList($currencies = ['USD','EUR'])
     {
         try {
 
-            $sql = "
+            $result = $this->dataBaseService->executeRawSQL(
+                "
                 SELECT * FROM `exchange_rate`
                 WHERE `currency` in (:currencies)
                 AND `source_id` = :source_id
-            ";
-
-            $values = [
-                'currencies' => $currencies,
-                'source_id' => 1
-            ];
-
-            $types = [
-                'currencies' => Connection::PARAM_INT_ARRAY,
-                'source_id' => \PDO::PARAM_STR
-            ];
-
-            $stmt = $this
-                ->doctrine
-                ->getManager()
-                ->getConnection()
-                ->executeQuery($sql, $values, $types);
-
-            $result = $stmt->fetchAll();
+            ", [
+                    'currencies' => $currencies,
+                    'source_id' => 1
+                ],
+                [
+                    'currencies' => Connection::PARAM_INT_ARRAY,
+                    'source_id' => \PDO::PARAM_STR
+                ]
+            );
 
             var_dump($result);
-        } catch (\Exception $e) {
 
-            die($e->getMessage());
+
+        } catch (\Exception $e) {
+            $this->createOnError($e);
         }
     }
 
 
-    protected function createOnError($message)
+    protected function createOnError(\Exception $e)
     {
+
+        $message = $e->getMessage();
+
         if (strpos($message, 'Base table or view not found') !== false) {
 
             if (strpos($message,'exchange_rate') !== false) {
-
-                $sql = "
-                    CREATE TABLE IF NOT EXISTS `rate_source` (
-                      `id` int NOT NULL COMMENT 'Service id' AUTO_INCREMENT PRIMARY KEY,
-                      `url` varchar(255) NOT NULL COMMENT 'Service url',
-                      `method` enum ('POST','GET') NULL DEFAULT 'GET',
-                      `parameters` varchar(255) NULL COMMENT 'Parameters to request (if necessary)',
-                      `frequency` int NULL DEFAULT '1000' COMMENT 'Frequency of request milliseconds',
-                      `active` enum ('ACTIVE','NOT ACTIVE','DELETED') NOT NULL DEFAULT 'ACTIVE' COMMENT 'Active or not'
-                    ) ENGINE='InnoDB' COLLATE 'utf8_general_ci';
-                ";
-
-
+                return (new CreateRateSource($this->dataBaseService))->up();
             }
 
         }
+
+        die($e->getMessage());
+
+        throw $e;
 
     }
 

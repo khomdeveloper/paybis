@@ -20,7 +20,7 @@ class MySQLService
         $this->connection = $this->manager->getConnection();
     }
 
-    public function executeRawSQL(string $sql, array $values, array $types)
+    public function executeRawSQL(string $sql, array $values = [], array $types = [])
     {
         $stmt = $this->connection
             ->executeQuery($sql, $values, $types);
