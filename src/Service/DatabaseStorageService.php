@@ -8,6 +8,8 @@
 
 namespace App\Service;
 
+use Doctrine\DBAL\Connection;
+
 /**
  * Description of DatabaseStorageService
  *
