@@ -24,7 +24,7 @@ class ApiController {
      
         $dataBaseService = new DatabaseStorageService($this->doctrine);
         
-        $dataBaseServiсe->getList();
+        $dataBaseService->getList();
         
     }
     
