@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class RateSource
 {
     /**
-     * @ORM\Column(type="integer)
+     * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(startegy="AUTO")
      */
