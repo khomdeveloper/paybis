@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Migrations;
+namespace App\Migrations\MigrationList;
 
 
 interface MigrationSQLDeterminatorInterface

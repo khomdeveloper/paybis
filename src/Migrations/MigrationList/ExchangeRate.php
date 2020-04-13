@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Migrations;
+namespace App\Migrations\MigrationList;
 
 
-class CreateExchangeRate implements MigrationSQLDeterminatorInterface
+class ExchangeRate implements MigrationSQLDeterminatorInterface
 {
 
     public function getUpSQL()

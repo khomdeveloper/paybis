@@ -24,12 +24,29 @@ class AutoMigration extends AbstractMigration
             throw new \Exception("Class {$this->migrationName} not exists");
         }
 
-        return $this->dataBaseService->executeRawSQL(
-            (new $this->migrationName())->getUpSQL(),
-            [],
-            [],
-            false
-        );
+        $upSQL = (new $this->migrationName())->getUpSQL();
+
+        if (is_array($upSQL)) {
+
+            foreach ($upSQL as $sql) {
+               $stmt = $this->dataBaseService->executeRawSQL(
+                   $sql,
+                   [],
+                   [],
+                   false
+               );
+            }
+
+            return $stmt;
+
+        } else {
+            return $this->dataBaseService->executeRawSQL(
+                $upSQL,
+                [],
+                [],
+                false
+            );
+        }
     }
 
     public function dn()

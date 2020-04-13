@@ -1,15 +1,15 @@
 <?php
 
 
-namespace App\Migrations;
+namespace App\Migrations\MigrationList;
 
 
-class CreateRateSource implements MigrationSQLDeterminatorInterface
+class RateSource implements MigrationSQLDeterminatorInterface
 {
 
     public function getUpSQL()
     {
-        return "
+        return ["
                     CREATE TABLE IF NOT EXISTS `rate_source` (
                       `id` int NOT NULL COMMENT 'Service id' AUTO_INCREMENT PRIMARY KEY,
                       `url` varchar(255) NOT NULL COMMENT 'Service url',
@@ -18,7 +18,10 @@ class CreateRateSource implements MigrationSQLDeterminatorInterface
                       `frequency` int NULL DEFAULT '1000' COMMENT 'Frequency of request milliseconds',
                       `active` enum ('ACTIVE','NOT ACTIVE','DELETED') NOT NULL DEFAULT 'ACTIVE' COMMENT 'Active or not'
                     ) ENGINE='InnoDB' COLLATE 'utf8_general_ci';
-                ";
+                ","
+                    INSERT IGNORE INTO `rate_source`(`url`)
+                    VALUES ('https://blockchain.info/ticker')
+                "];
     }
 
     public function getDnSQL()
@@ -35,6 +38,5 @@ class CreateRateSource implements MigrationSQLDeterminatorInterface
             return false;
         }
     }
-
 
 }

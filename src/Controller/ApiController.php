@@ -8,12 +8,11 @@
 
 namespace App\Controller;
 
+use App\Repository\ExchangeRateRepository;
 use App\Service\DataBaseServices\MySQLService;
-use App\Service\DatabaseStorageService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 
 /**
@@ -29,9 +28,12 @@ class ApiController extends AbstractController {
 
             $mySQLservice = new MySQLService($this->getDoctrine());
 
-            $list = (new DatabaseStorageService($mySQLservice))->getList();
+            $list = (new ExchangeRateRepository($mySQLservice))->getList();
 
-            var_dump($list);
+            if (empty($list)){
+                //need to check that call already done
+                //call API service
+            }
 
             return (new JsonResponse([
                 'status' => 'success'
