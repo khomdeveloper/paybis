@@ -15,7 +15,7 @@ class RateSource
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(startegy="AUTO")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     public $id;
 
