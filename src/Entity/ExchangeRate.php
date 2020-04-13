@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class ExchangeRate
  * @package App\Entity
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ExchangeRateRepository")
  *
  *  @ORM\Table(name="rate_source")
  */

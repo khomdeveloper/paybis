@@ -8,8 +8,9 @@ use App\Migrations\MigrationList\ExchangeRate;
 use App\Migrations\MigrationList\RateSource;
 use App\Service\DataBaseServices\DataBaseServiceInterface;
 use Doctrine\DBAL\Connection;
+use Doctrine\ORM\EntityRepository;
 
-class ExchangeRateRepository
+class ExchangeRateRepository extends EntityRepository
 {
 
     protected $dataBaseService;
