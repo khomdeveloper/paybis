@@ -11,7 +11,6 @@ namespace App\Service;
 use App\Migrations\CreateRateSource;
 use App\Service\DataBaseServices\DataBaseServiceInterface;
 use Doctrine\DBAL\Connection;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Description of DatabaseStorageService

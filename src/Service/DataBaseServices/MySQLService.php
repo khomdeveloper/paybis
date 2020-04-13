@@ -6,7 +6,7 @@ namespace App\Service\DataBaseServices;
 
 use Doctrine\Persistence\ManagerRegistry;
 
-class MySQLService
+class MySQLService implements DataBaseServiceInterface
 {
 
     protected $doctrine;
