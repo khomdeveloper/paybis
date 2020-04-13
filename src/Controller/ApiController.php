@@ -11,6 +11,7 @@ namespace App\Controller;
 use App\Service\DataBaseServices\MySQLService;
 use App\Service\DatabaseStorageService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -28,13 +29,11 @@ class ApiController extends AbstractController {
 
             $mySQLservice = new MySQLService($this->getDoctrine());
 
+            (new DatabaseStorageService($mySQLservice))->getList();
 
-
-            //$dataBaseService = new DatabaseStorageService($this->getDoctrine());
-
-            //$dataBaseService->getList();
-
-
+            return (new JsonResponse([
+                'status' => 'success'
+            ]));
 
         } catch (\Throwable $e) {
             die($e->getMessage());

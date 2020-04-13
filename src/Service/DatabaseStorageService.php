@@ -52,8 +52,6 @@ class DatabaseStorageService {
 
         } catch (\Exception $e) {
             $this->createOnError($e);
-        } catch (\Throwable $e) {
-            die($e->getMessage());
         }
     }
 
