@@ -14,16 +14,17 @@ namespace App\Service;
  * @author valera261104
  */
 class EntryService {
-    
+
     protected $entityManager;
-   
+
     public function __construct($entityManager)
-    { 
-        $this->entityManager = $entityManager;  
+    {
+        $this->entityManager = $entityManager;
     }
-    
-    public function getList($order = [], $start = [], $limit = []) {
-        
+
+    public function getList($order = [], $start = [], $limit = [])
+    {
+
         $sql = "
             SELECT * FROM `entry`
             LEFT JOIN `user` on `entry`.`author_id` = `user`.`id`
@@ -31,9 +32,8 @@ class EntryService {
             LIMIT 3
             ";
         $statement = $this->entityManager->getConnection()->prepare($sql);
-        $statement->execute();        
+        $statement->execute();
         return $statement->fetchAll();
-        
     }
-    
+
 }

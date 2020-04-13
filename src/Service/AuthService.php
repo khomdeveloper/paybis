@@ -26,7 +26,7 @@ class AuthService {
     }
     
     public function check($login, $pass){
-        
+ 
         $result = $this->doctrine
                 ->getRepository(User::class)
                 ->findBy([
