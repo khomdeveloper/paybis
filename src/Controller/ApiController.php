@@ -23,7 +23,9 @@ class ApiController extends AbstractController {
     
     public function call(Request $request)
     {
-     
+
+        die('stop');
+
         $dataBaseService = new DatabaseStorageService($this->getDoctrine());
         
         $dataBaseService->getList();

@@ -42,7 +42,12 @@ class DatabaseStorageService {
                 'source_id' => \PDO::PARAM_STR
             ];
 
-            $stmt = $conn->executeQuery($sql, $values, $types);
+            $stmt = $this
+                ->doctrine
+                ->getManager()
+                ->getConnection()
+                ->executeQuery($sql, $values, $types);
+
             $result = $stmt->fetchAll();
 
             var_dump($result);
