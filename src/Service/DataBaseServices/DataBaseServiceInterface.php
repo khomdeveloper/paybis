@@ -9,6 +9,6 @@ use Doctrine\Persistence\ManagerRegistry;
 interface DataBaseServiceInterface
 {
 
-    public function executeRawSQL(string $sql, array $values = [], array $types = []);
+    public function executeRawSQL(string $sql, array $values = [], array $types = [], $autoMigration = null);
 
 }
