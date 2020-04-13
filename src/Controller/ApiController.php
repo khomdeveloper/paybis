@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Service\DataBaseServices\MySQLService;
 use App\Service\DatabaseStorageService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,14 +21,20 @@ use Symfony\Component\HttpFoundation\Response;
  * @author valera261104
  */
 class ApiController extends AbstractController {
-    
+
     public function call(Request $request)
     {
         try {
 
-            $dataBaseService = new DatabaseStorageService($this->getDoctrine());
+            $mySQLservice = new MySQLService($this->getDoctrine());
 
-            $dataBaseService->getList();
+            var_dump($mySQLservice);
+
+            //$dataBaseService = new DatabaseStorageService($this->getDoctrine());
+
+            //$dataBaseService->getList();
+
+
 
         } catch (\Throwable $e) {
             die($e->getMessage());
