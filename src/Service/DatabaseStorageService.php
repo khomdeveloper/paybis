@@ -33,10 +33,11 @@ class DatabaseStorageService {
 
             $result = $this->dataBaseService->executeRawSQL(
                 "
-                SELECT * FROM `exchange_rate`
-                WHERE `currency` in (:currencies)
-                AND `source_id` = :source_id
-            ", [
+                    SELECT * FROM `exchange_rate`
+                    WHERE `currency` in (:currencies)
+                    AND `source_id` = :source_id
+                ",
+                [
                     'currencies' => $currencies,
                     'source_id' => 1
                 ],
@@ -51,6 +52,8 @@ class DatabaseStorageService {
 
         } catch (\Exception $e) {
             $this->createOnError($e);
+        } catch (\Throwable $e) {
+            die($e->getMessage());
         }
     }
 
