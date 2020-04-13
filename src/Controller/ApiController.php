@@ -8,6 +8,8 @@
 
 namespace App\Controller;
 
+use App\Service\DatabaseStorageService;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author valera261104
  */
-class ApiController {
+class ApiController extends AbstractController {
     
     public function call(Request $request)
     {
