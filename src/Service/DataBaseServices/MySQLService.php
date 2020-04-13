@@ -4,6 +4,7 @@
 namespace App\Service\DataBaseServices;
 
 
+use App\Migrations\AutoMigration;
 use Doctrine\Persistence\ManagerRegistry;
 
 class MySQLService implements DataBaseServiceInterface
@@ -20,17 +21,27 @@ class MySQLService implements DataBaseServiceInterface
         $this->connection = $this->manager->getConnection();
     }
 
-    public function executeRawSQL(string $sql, array $values = [], array $types = [])
+    public function executeRawSQL(string $sql, array $values = [], array $types = [], $autoMigration = null)
     {
-        $stmt = $this->connection
-            ->executeQuery($sql, $values, $types);
+        try {
 
-        var_dump($stmt);
+            return $this->connection
+                ->executeQuery($sql, $values, $types);
 
-
-        die('stop');
-
-        return $stmt;
+        } catch (\Exception $e) {
+            if (empty($autoMigration)){
+                throw $e;
+            } else {
+                if (is_string($autoMigration)) {
+                    (new AutoMigration($this, $autoMigration))->condition($e)->up();
+                } elseif (is_array($autoMigration)){
+                    foreach ($autoMigration as $migration){
+                        (new AutoMigration($this, $migration))->condition($e)->up();
+                    }
+                }
+                $this->executeRawSQL($sql, $values, $types); //run recursively without $autoMigration variable so we try to migrate once
+            }
+        }
     }
 
 }

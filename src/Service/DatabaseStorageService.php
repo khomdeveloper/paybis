@@ -28,7 +28,6 @@ class DatabaseStorageService {
 
     public function getList($currencies = ['USD','EUR'])
     {
-        try {
 
             $result = $this->dataBaseService->executeRawSQL(
                 "
@@ -43,35 +42,18 @@ class DatabaseStorageService {
                 [
                     'currencies' => Connection::PARAM_INT_ARRAY,
                     'source_id' => \PDO::PARAM_STR
+                ],
+                [
+                    CreateRateSource::class
                 ]
             );
 
             var_dump($result);
 
 
-        } catch (\Exception $e) {
-            $this->createOnError($e);
-        }
     }
 
 
-    protected function createOnError(\Exception $e)
-    {
 
-        $message = $e->getMessage();
-
-        if (strpos($message, 'Base table or view not found') !== false) {
-
-            if (strpos($message,'exchange_rate') !== false) {
-                return (new CreateRateSource($this->dataBaseService))->up();
-            }
-
-        }
-
-        die($e->getMessage());
-
-        throw $e;
-
-    }
 
 }

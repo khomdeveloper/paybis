@@ -33,8 +33,6 @@ class ApiController extends AbstractController {
 
             var_dump($list);
 
-            die('stop');
-
             return (new JsonResponse([
                 'status' => 'success'
             ]));
