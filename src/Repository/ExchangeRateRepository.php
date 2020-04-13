@@ -21,7 +21,9 @@ class ExchangeRateRepository
 
     public function getList()
     {
+        //здесь добавить вызов из кеша редиса по запросу
 
+        //try to get result from local database
         $result = $this->dataBaseService->executeRawSQL(
             "
                     SELECT * FROM `exchange_rate`
@@ -41,6 +43,13 @@ class ExchangeRateRepository
                 ExchangeRate::class
             ]
         );
+
+        if (empty($result)) {
+            //can be empty if bad request
+            //or not any records
+        }
+
+        return $result;
 
     }
 

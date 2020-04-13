@@ -30,10 +30,7 @@ class ApiController extends AbstractController {
 
             $list = (new ExchangeRateRepository($mySQLservice))->getList();
 
-            if (empty($list)){
-                //need to check that call already done
-                //call API service
-            }
+            var_dump($list);
 
             return (new JsonResponse([
                 'status' => 'success'

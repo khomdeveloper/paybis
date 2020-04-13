@@ -6,12 +6,16 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Class ExchangeRate
+ * @package App\Entity
+ *
  * @ORM\Entity
  *
- * @ORM\Table(name="rate_source")
+ *  @ORM\Table(name="rate_source")
  */
-class RateSource
+class ExchangeRate
 {
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -20,32 +24,23 @@ class RateSource
     public $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
-    public $url;
+    public $source_id;
 
     /**
      * @ORM\Column(type="string")
      */
-    public $method;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    public $parameters;
-
+    public $currency;
 
     /**
      * @ORM\Column(type="integer")
      */
-    public $frequency;
-
+    public $date;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="float")
      */
-    public $status;
-
-
+    public $rate;
 
 }

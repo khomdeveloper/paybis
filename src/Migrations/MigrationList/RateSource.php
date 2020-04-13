@@ -16,7 +16,8 @@ class RateSource implements MigrationSQLDeterminatorInterface
                       `method` enum ('POST','GET') NULL DEFAULT 'GET',
                       `parameters` varchar(255) NULL COMMENT 'Parameters to request (if necessary)',
                       `frequency` int NULL DEFAULT '1000' COMMENT 'Frequency of request milliseconds',
-                      `active` enum ('ACTIVE','NOT ACTIVE','DELETED') NOT NULL DEFAULT 'ACTIVE' COMMENT 'Active or not'
+                      `status` enum ('READY','CALLED','DOWNED','DEPRECATED') NOT NULL DEFAULT 'READY' COMMENT 'Active or not',
+                      `downed` int NOT NULL default 0 COMMENT 'Source down counter'
                     ) ENGINE='InnoDB' COLLATE 'utf8_general_ci';
                 ","
                     INSERT IGNORE INTO `rate_source`(`url`)

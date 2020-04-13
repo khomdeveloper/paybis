@@ -14,7 +14,7 @@ class ExchangeRate implements MigrationSQLDeterminatorInterface
                       `id` int NOT NULL COMMENT 'Self incremental id' AUTO_INCREMENT PRIMARY KEY,
                       `source_id` int(11) NOT NULL COMMENT 'Data source id',
                       `currency` varchar(255) COLLATE 'utf8_general_ci' NOT NULL COMMENT 'Currency',
-                      `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Insert Date',
+                      `date` bigint NOT NULL DEFAULT 0 COMMENT 'Unix timestamp when data was inserted',
                       `rate` float NOT NULL COMMENT 'Exchange rate',
                       FOREIGN KEY (`source_id`) REFERENCES `rate_source` (`id`) ON DELETE RESTRICT
                     ) COMMENT='Record auto increment id' ENGINE='InnoDB' COLLATE 'utf8_general_ci';
@@ -23,7 +23,7 @@ class ExchangeRate implements MigrationSQLDeterminatorInterface
 
     public function getDnSQL()
     {
-
+        return "DROP TABLE `exchange_rate`";
     }
 
     public function getCondition(string $errorMessage)
