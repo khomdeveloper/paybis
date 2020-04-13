@@ -23,13 +23,15 @@ class ApiController extends AbstractController {
     
     public function call(Request $request)
     {
+        try {
 
-        die('stop');
+            $dataBaseService = new DatabaseStorageService($this->getDoctrine());
 
-        $dataBaseService = new DatabaseStorageService($this->getDoctrine());
-        
-        $dataBaseService->getList();
-        
+            $dataBaseService->getList();
+
+        } catch (\Throwable $e) {
+            die($e->getMessage());
+        }
     }
     
     
