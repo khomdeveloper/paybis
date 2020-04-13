@@ -29,7 +29,11 @@ class ApiController extends AbstractController {
 
             $mySQLservice = new MySQLService($this->getDoctrine());
 
-            (new DatabaseStorageService($mySQLservice))->getList();
+            $list = (new DatabaseStorageService($mySQLservice))->getList();
+
+            var_dump($list);
+
+            die('stop');
 
             return (new JsonResponse([
                 'status' => 'success'
