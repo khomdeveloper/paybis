@@ -23,6 +23,7 @@ class AutoMigration extends AbstractMigration
         if (!class_exists($this->migrationName)) {
             throw new \Exception("Class {$this->migrationName} not exists");
         }
+
         return $this->dataBaseService->executeRawSQL(
             (new $this->migrationName())->getUpSQL(),
             [],
@@ -40,6 +41,7 @@ class AutoMigration extends AbstractMigration
 
         if (class_exists($this->migrationName)) {
             $migration = new $this->migrationName();
+            var_dump($migration);
             if ($migration->getCondition($e->getMessage())) {
                 return $this;
             }

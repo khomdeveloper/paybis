@@ -36,7 +36,6 @@ class MySQLService implements DataBaseServiceInterface
                     (new AutoMigration($this, $autoMigration))->condition($e)->up();
                 } elseif (is_array($autoMigration)){
                     foreach ($autoMigration as $migration){
-                        die($migration);
                         (new AutoMigration($this, $migration))->condition($e)->up();
                     }
                 }
