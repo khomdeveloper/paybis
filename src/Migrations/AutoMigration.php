@@ -41,8 +41,8 @@ class AutoMigration extends AbstractMigration
 
         if (class_exists($this->migrationName)) {
             $migration = new $this->migrationName();
-            var_dump($migration);
             if ($migration->getCondition($e->getMessage())) {
+                die('ok');
                 return $this;
             }
         }
