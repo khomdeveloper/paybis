@@ -37,7 +37,7 @@ class UpdateExchangeRate extends Command
                 'loop',
                 null,
                 InputOption::VALUE_OPTIONAL,
-                '--mode=infinity run recursion process (for usage without crone)',
+                '--loop=25 times to run recursion process (for usage without crone)',
                 null
             );
 
@@ -49,7 +49,7 @@ class UpdateExchangeRate extends Command
         $delay = $this->parameters->get('delay_between_calls');
 
         if ($loop > 0) {
-            $this->getDataService->checkActual();
+            $this->getDataService->checkActual($delay);
             echo "remains {$loop} loops";
             usleep($delay * 1000000);
             $this->callService($loop-1);
