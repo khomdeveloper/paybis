@@ -81,7 +81,7 @@ class GetDataService
                 $response = (new RequestService())->call([
                     CURLOPT_URL => $rateSource->getUrl(),
                     CURLOPT_TIMEOUT => 30,
-                    CURLOPT_RETURNTRANSFER => 1
+                    CURLOPT_RETURNTRANSFER => 1,
                 ]);
 
                 if (empty($response)){
@@ -110,8 +110,8 @@ class GetDataService
 
             } catch (\Exception $e) {
                 //TODO: handle situation if service downed
+                throw $e;
             }
-
 
 
         }
