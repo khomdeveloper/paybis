@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ApiController extends AbstractController {
 
-    public function call(Request $request)
+    public function call(Request $request, GetDataService $getDataService)
     {
         try {
 
@@ -35,9 +35,11 @@ class ApiController extends AbstractController {
 
             //var_dump($list);
 
-            $getDataService = $this->container->get(GetDataService::class);
+            //$getDataService = $this->container->get(GetDataService::class);
 
-            $getDataService->checkActual($this->getParameter('actual_time'));
+            var_dump($getDataService);
+
+            //$getDataService->checkActual($this->getParameter('actual_time'));
 
             return (new JsonResponse([
                 'status' => 'success'
