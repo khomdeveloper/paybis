@@ -12,9 +12,9 @@ class WorkerControlService
 
     protected $dataBaseService;
 
-    public function __construct(DataBaseServiceInterface $dataBaseSerivce)
+    public function __construct(DataBaseServiceInterface $dataBaseService)
     {
-        $this->dataBaseService = $dataBaseSerivce;
+        $this->dataBaseService = $dataBaseService;
     }
 
     public function checkWorker()
