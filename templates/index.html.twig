@@ -18,6 +18,21 @@
             <p>currency can be EUR, USD, RUB</p>
             <p>if no &currency all will returned</p>
             <p>if no &end current date will be used as period end</p>
+            <h2>MySQL</h2>
+            <p>MySQL login pass in file .env</p>
+            <p>DATABASE_URL=mysql://[USER]:[PASS]@[HOST]/[DATABASE]?reconnect=true</p>
+            <p>Structure tables will created automatically</p>
+            <h2>Worker</h2>
+            <p>If worker was not start data ipdates on request (with frequency limit)</p>
+            <p>Console command to update data</p>
+            <p>php bin/console app:updateExchangeRate</p>
+            <p>It can be started by crone</p>
+            <p>php bin/console app:updateExchangeRate --loop=50</p>
+            <p>With loop command will loop 50 (or as you want) times with delay specificated in /config/services.yaml delay_between_calls in second</p>
+            <p>Parameter can be less then second it used microtime everywhere</p>
+            <p>This option can be used to start test simple worker if another way is difficult</p>
+            <p>If you need to termoinate worker you can change in data table 'worker_control' 'status' = 'DEAD'</p>
+            <p>Worker will read this and terminated (record in database will be deleted)</p>
         </section>
         <section class="footer">
             <div class="ac data">
