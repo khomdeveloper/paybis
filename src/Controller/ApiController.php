@@ -38,15 +38,14 @@ class ApiController extends AbstractController {
                 return $this->render('index.html.twig');
             }
 
-            $start = empty($begin) ? new DateTime() : new DateTime($begin);
+            $start = empty($begin) ? new \DateTime() : new \DateTime($begin);
 
             var_dump($start);
 
-            $finish = empty($end) ? new DateTime() : new DateTime($end);
+            $finish = empty($end) ? new \DateTime() : new \DateTime($end);
 
             var_dump($finish);
 
-            
             $mySQLservice = new MySQLService($this->getDoctrine());
 
             //$list = (new ExchangeRateRepository($mySQLservice))->getList();
