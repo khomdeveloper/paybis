@@ -57,9 +57,9 @@ class RateSourceResponseParser
                 'RUB' => $value['RUB'],
                 'EUR' => $value['EUR']
             ] , [
-                'USD' => Connection::PARAM_INT_ARRAY,
-                'RUB' => Connection::PARAM_INT_ARRAY,
-                'EUR' => Connection::PARAM_INT_ARRAY
+                'USD' => Connection::PARAM_STR_ARRAY,
+                'RUB' => Connection::PARAM_STR_ARRAY,
+                'EUR' => Connection::PARAM_STR_ARRAY
             ]);
 
             return true;
