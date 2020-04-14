@@ -23,7 +23,7 @@ class WorkerControlService
             SELECT `status` FROM `worker_control`
         ",[],[],[
             WorkerControl::class
-        ])->fetchOne();
+        ])->fetch();
 
         var_dump($result);
     }
