@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Repository\ExchangeRateRepository;
+use App\Service\ClientServices\GetDataService;
 use App\Service\DataBaseServices\MySQLService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -34,9 +35,9 @@ class ApiController extends AbstractController {
 
             //var_dump($list);
 
-            $getDataService = $this->container->get('App\Service\ClientServices\GetDataService');
+            $getDataService = $this->container->get(GetDataService::class);
 
-            var_dump($getDataService);
+            $getDataService->checkActual($this->getParameter('actual_time'));
 
             return (new JsonResponse([
                 'status' => 'success'

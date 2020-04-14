@@ -24,7 +24,7 @@ class GetDataService
         $this->connection = $this->manager->getConnection();
     }
 
-    public function checkActual()
+    public function checkActual($actual_time)
     {
         //try to get last record from database
         $exchangeRateRepository = (new ExchangeRateRepository((new MySQLService($this->doctrine))));
@@ -37,6 +37,8 @@ class GetDataService
             ])->fetch();
 
             var_dump($dataSource);
+
+            die($actual_time);
         }
 
         //если флаг called уже стоит ничего не делаем
