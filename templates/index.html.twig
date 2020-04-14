@@ -2,34 +2,26 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Check24 test task{% endblock %}</title>
+        <title>{% block title %}TEST TASK{% endblock %}</title>
         {% block stylesheets %}
             <link href="{{ asset('styles/main.css') }}" type="text/css" rel="stylesheet" />
         {% endblock %}
     </head>
     <body>
         <section class="header">
-            <div class="ac">
-                <a href="/" class="logo"><img src="{{ asset('images/logo.jpg') }}" width="100"/></a>
-            </div>
-            <div class="ac">
-                <a href="/">Homepage</a>&nbsp;|&nbsp;<a href="/login">Login</a>
-            </div>
+            <h1>Test task</h1>
         </section>
         <section class="content">
-            <div>
-                {% for key, value in list %}
-                    <p>{{ value.date }}<b>
-                        {{ value.title }}
-                        </b></p>
-                        <div>{{  value.description|slice(0,100)~'...' }}</div>
-                        <p>Author: {{ value.name }}</p>
-                {%  endfor %}
-            </div>
+            <h2>Request</h2>
+            <h3>GET</h3>
+            <p>/api/?currency=EUR&begin=2020-05-05 12:00&end=2020-05-05 13:00</p>
+            <p>currency can be EUR, USD, RUB</p>
+            <p>if no &currency all will returned</p>
+            <p>if no &end current date will be used as period end</p>
         </section>
         <section class="footer">
             <div class="ac data">
-                &copy; 2017 Imprint
+                &copy; 2020
             </div>
         </section>
         {% block body %}{% endblock %}

@@ -27,6 +27,23 @@ class ApiController extends AbstractController {
     {
         try {
 
+            $currency = $request->get('currency');
+
+            $begin = $request->get('begin');
+
+            $end = $request->get('end');
+
+            if (empty($currency) && empty($begin) && empty($end)){
+                return $this->render('index.html.twig');
+            }
+
+            var_dump($currency);
+
+            var_dump($begin);
+
+            var_dump($end);
+
+
             $mySQLservice = new MySQLService($this->getDoctrine());
 
             //$list = (new ExchangeRateRepository($mySQLservice))->getList();
@@ -37,7 +54,7 @@ class ApiController extends AbstractController {
 
             //$getDataService = $this->container->get(GetDataService::class);
 
-            $result = $getDataService->checkActual($this->getParameter('delay_between_calls'));
+            //$result = $getDataService->checkActual($this->getParameter('delay_between_calls'));
 
             return (new JsonResponse([
                 'status' => 'success',
