@@ -39,6 +39,8 @@ class GetDataService
 
         $lastRecord = $exchangeRateRepository->getLastRecord();
 
+        var_dump($lastRecord);
+
         if (empty($lastRecord)){ //TODO: add time criteria
 
             //TODO: обернуть в транзакцию
