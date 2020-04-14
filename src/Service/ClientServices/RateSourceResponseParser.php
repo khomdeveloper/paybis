@@ -48,8 +48,8 @@ class RateSourceResponseParser
                     INSERT INTO `exchange_rate` 
                     (`source_id`,`currency`,`date`,`rate`)
                     VALUES
-                    (:USD)
-                    (:RUB)
+                    (:USD),
+                    (:RUB),
                     (:EUR)
                    ";
 
