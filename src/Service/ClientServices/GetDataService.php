@@ -98,9 +98,10 @@ class GetDataService
                     //unlock rateSource
                     $rateSource->setStatus('READY');
                     $this->manager->flush();
+
                     $this->getConnection()->commit();
 
-                } catch (\Throwble $e) {
+                } catch (\Throwable $e) {
                     $this->getConnection()->rollBack();
                     throw $e;
                 }
