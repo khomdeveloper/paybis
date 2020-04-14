@@ -63,7 +63,8 @@ class ExchangeRateRepository extends EntityRepository
             ],
             [
                 'currency' => Connection::PARAM_STR_ARRAY,
-                'date' => \PDO::PARAM_STR
+                'end' => \PDO::PARAM_STR,
+                'begin' => \PDO::PARAM_STR,
             ],
             [
                 RateSource::class,
