@@ -37,7 +37,7 @@ class ApiController extends AbstractController {
 
             //$getDataService = $this->container->get(GetDataService::class);
 
-            $getDataService->checkActual($this->getParameter('actual_time'));
+            $getDataService->checkActual($this->getParameter('delay_between_calls'));
 
             return (new JsonResponse([
                 'status' => 'success'

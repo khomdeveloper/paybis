@@ -32,7 +32,7 @@ class GetDataService
         return $this->connection;
     }
 
-    public function checkActual($actual_time)
+    public function checkActual($delayBetweenCalls)
     {
         //try to get last record from database
         $exchangeRateRepository = (new ExchangeRateRepository((new MySQLService($this->doctrine))));
@@ -40,7 +40,7 @@ class GetDataService
         $lastRecord = $exchangeRateRepository->getLastRecord();
 
         if (!empty($lastRecord)) {
-            $expectedTimeToCall = $lastRecord->date + $actual_time;
+            $expectedTimeToCall = $lastRecord->date + $delayBetweenCalls;
         }
 
         if (empty($lastRecord) || microtime(true) > $expectedTimeToCall){

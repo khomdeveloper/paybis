@@ -9,6 +9,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class UpdateExchangeRate extends Command
 {
@@ -17,9 +18,13 @@ class UpdateExchangeRate extends Command
 
     private $getDataService;
 
-    public function __construct(string $name = null, GetDataService $getDataService)
+    private $parameters;
+
+    public function __construct(string $name = null, GetDataService $getDataService, ParameterBagInterface $parameters)
     {
         $this->getDataService = $getDataService;
+
+        $this->parameters = $parameters;
 
         parent::__construct($name);
     }
@@ -38,6 +43,12 @@ class UpdateExchangeRate extends Command
 
     }
 
+    protected function callService(GetDataService $dataService, integer $loop = 1)
+    {
+        if ($loop > 0)
+        $dataService->checkActual();
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->write('Command started');
@@ -51,7 +62,9 @@ class UpdateExchangeRate extends Command
             $output->writeln( ' once');
         }
 
-        $output->writeln(get_class($this->getDataService));
+        $output->writeln($this->parameters->get('delay_between_calls'));
+
+        //$output->writeln(get_class($this->getDataService));
 
         return 1;
 
