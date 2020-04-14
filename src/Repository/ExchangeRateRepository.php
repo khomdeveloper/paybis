@@ -43,8 +43,8 @@ class ExchangeRateRepository extends EntityRepository
 
         $now = time();
 
-        $end = min($now, $start->getTimestamp());
-        $begin = min($end, $finish->getTimestamp());
+        $end = min($now, $finish->getTimestamp());
+        $begin = min($end, $start->getTimestamp());
 
         var_dump($begin);
 
