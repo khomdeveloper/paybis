@@ -35,35 +35,41 @@ class ExchangeRateRepository extends EntityRepository
 
     }
 
-    public function getList()
+    public function getList(\DateTime $start, \DateTime $finish , $currency = ['EUR','USD','RUB'])
     {
-        //здесь добавить вызов из кеша редиса по запросу
+        if (is_string($currency)){
+            $currency = [$currency];
+        }
+
+        $now = time();
+
+        $end = min($now, $start->getTimestamp());
+        $begin = min($end, $start->getTimestamp());
+
+        //TODO: add here redis cache
 
         //try to get result from local database
         $result = $this->dataBaseService->executeRawSQL(
             "
                     SELECT * FROM `exchange_rate`
-                    WHERE `currency` in (:currencies)
-                    AND `source_id` = :source_id
+                    WHERE `currency` in (:currency)
+                    AND `date` < :end 
+                    AND `date` > :begin
                 ",
             [
-                'currencies' => $currencies,
-                'source_id' => 1
+                'currency' => $currency,
+                'end' => $end,
+                'begin' => $begin,
             ],
             [
-                'currencies' => Connection::PARAM_INT_ARRAY,
-                'source_id' => \PDO::PARAM_STR
+                'currency' => Connection::PARAM_STR_ARRAY,
+                'date' => \PDO::PARAM_STR
             ],
             [
                 RateSource::class,
                 ExchangeRate::class
             ]
         );
-
-        if (empty($result)) {
-            //can be empty if bad request
-            //or not any records
-        }
 
         return $result;
 

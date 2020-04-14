@@ -38,7 +38,7 @@ class ApiController extends AbstractController {
                 return $this->render('index.html.twig');
             }
 
-            $start = empty($begin) ? new \DateTime() : new \DateTime($begin);
+            $start = empty($begin) ? (new \DateTime())->modify('-1 day') : new \DateTime($begin);
 
             var_dump($start);
 
@@ -48,7 +48,9 @@ class ApiController extends AbstractController {
 
             $mySQLservice = new MySQLService($this->getDoctrine());
 
-            //$list = (new ExchangeRateRepository($mySQLservice))->getList();
+            $list = (new ExchangeRateRepository($mySQLservice))->getList($start, $finish, $currency);
+
+            var_dump($list);
 
             //$list = (new ExchangeRateRepository($mySQLservice))->getLastRecord();
 
