@@ -30,8 +30,6 @@ class RateSourceResponseParser
                 throw new RequestServiceException('Wrong response format');
             }
 
-            var_dump($data);
-
             $time = microtime(true);
 
             foreach (['USD','EUR','RUB'] as $currency) {
