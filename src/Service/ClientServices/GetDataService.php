@@ -40,8 +40,7 @@ class GetDataService
         $lastRecord = $exchangeRateRepository->getLastRecord();
 
         if (!empty($lastRecord)) {
-            var_dump($lastRecord);
-            $expectedTimeToCall = $lastRecord->date + $delayBetweenCalls;
+            $expectedTimeToCall = $lastRecord['date'] + $delayBetweenCalls;
         }
 
         if (empty($lastRecord) || microtime(true) > $expectedTimeToCall){
