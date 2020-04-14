@@ -44,9 +44,9 @@ class WorkerControlService
                 WorkerControl::class
             ]);
 
-            /*
+
             $cmd = "php bin/console app:updateExchangeRate --loop=20 > /dev/null 2>/dev/null &";
-            shell_exec($cmd);*/
+            shell_exec($cmd);
 
             return true;
 
