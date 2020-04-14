@@ -9,6 +9,7 @@ use App\Entity\RateSource;
 use App\Repository\ExchangeRateRepository;
 use App\Service\DataBaseServices\MySQLService;
 use App\Service\NetworkServices\RequestService;
+use App\Service\NetworkServices\RequestServiceException;
 use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -73,14 +74,30 @@ class GetDataService
             };
 
             //calling service for data
+            try {
 
-            $response = (new RequestService())->call([
-                CURLOPT_URL => $rateSource->getUrl(),
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_RETURNTRANSFER => 1
-            ]);
+                $response = (new RequestService())->call([
+                    CURLOPT_URL => $rateSource->getUrl(),
+                    CURLOPT_TIMEOUT => 30,
+                    CURLOPT_RETURNTRANSFER => 1
+                ]);
 
-            var_dump($response);
+                if (empty($response)){
+                    throw new RequestServiceException('Empty response');
+                }
+
+                $data = json_decode($response, true);
+
+                if (!is_array($data)) {
+                    throw new RequestServiceException('Wrong response format');
+                }
+
+                var_dump($data);
+
+            } catch (\Exception $e) {
+                //TODO: handle situation if service downed
+            }
+
 
 
         }
