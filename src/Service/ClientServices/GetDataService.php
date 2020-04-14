@@ -24,6 +24,11 @@ class GetDataService
         $this->connection = $this->manager->getConnection();
     }
 
+    public function getConnection()
+    {
+        return $this->connection;
+    }
+
     public function checkActual($actual_time)
     {
         //try to get last record from database
@@ -32,17 +37,23 @@ class GetDataService
         $lastRecord = $exchangeRateRepository->getLastRecord();
 
         if (empty($lastRecord)){ //TODO: add time criteria
+
+            //TODO: обернуть в транзакцию
+
+            var_dump($this->connection);
+
             $dataSource = $this->manager->getRepository(RateSource::class)->findOneBy([
                'status' => 'READY'
             ]);
 
-            var_dump($dataSource);
+            if (empty($dataSource)){
+                //TODO: if CALLED present - ok - if not maybe all services downed
+            }
 
-            die($actual_time);
+
+
         }
 
-        //если флаг called уже стоит ничего не делаем
-        //ищем доступный сервис
         //запрашиваем сервис
         //сбрасываем флаг
         //проставляем дату - сделать секунды с unixtimestamp
