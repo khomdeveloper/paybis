@@ -48,10 +48,14 @@ class ApiController extends AbstractController {
                 $currency = ['EUR','USD','RUB'];
             }
 
+            var_dump($start);
+
+            var_dump($finish);
+
             $list = (new ExchangeRateRepository($mySQLservice))->getList($start, $finish, $currency)->fetchAll();
 
             var_dump($list);
-            
+
             return (new JsonResponse([
                 'status' => 'success',
                 'realCall' => $result
