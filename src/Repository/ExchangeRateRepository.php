@@ -28,7 +28,10 @@ class ExchangeRateRepository extends EntityRepository
             WHERE `id` > 0
             ORDER BY `id` DESC
             LIMIT 1
-        ")->fetchAll();
+        ",[],[],[
+            RateSource::class,
+            ExchangeRate::class
+        ])->fetchOne();
 
     }
 
