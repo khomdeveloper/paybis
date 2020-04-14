@@ -41,8 +41,6 @@ class ApiController extends AbstractController {
 
             (new WorkerControlService($mySQLservice))->needToStop();
 
-            var_dump($workerStatus);
-
             if (empty($currency) && empty($begin) && empty($end)){
                 return $this->render('index.html.twig');
             }

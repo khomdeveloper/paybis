@@ -55,7 +55,7 @@ class WorkerControlService
     {
 
         $result = $this->dataBaseService->executeRawSQL("
-            SELECT 'status' as `count` FROM `worker_control`
+            SELECT `status` FROM `worker_control`
         ",[],[],[
             WorkerControl::class
         ])->fetch();
