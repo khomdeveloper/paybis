@@ -8,6 +8,8 @@ use App\Entity\ExchangeRate;
 use App\Entity\RateSource;
 use App\Repository\ExchangeRateRepository;
 use App\Service\DataBaseServices\MySQLService;
+use App\Service\NetworkServices\RequestService;
+use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ManagerRegistry;
 
 class GetDataService
@@ -24,7 +26,7 @@ class GetDataService
         $this->connection = $this->manager->getConnection();
     }
 
-    public function getConnection()
+    public function getConnection(): Connection
     {
         return $this->connection;
     }
@@ -40,16 +42,45 @@ class GetDataService
 
             //TODO: обернуть в транзакцию
 
-            var_dump($this->connection);
+            $this->getConnection()->beginTransaction();
 
-            $dataSource = $this->manager->getRepository(RateSource::class)->findOneBy([
-               'status' => 'READY'
+            try {
+
+                $rateSource = $this->manager->getRepository(RateSource::class)->findOneBy([
+                    'status' => 'READY'
+                ]);
+
+                if (empty($rateSource)) {
+
+                    //need to analyze do we have already called service or all services are downed
+
+                    $this->getConnection()->rollBack();
+
+                    return true;
+                }
+
+                $rateSource->setStatus('CALLED');
+
+                $this->manager->flush();
+
+                $this->getConnection()->commit();
+
+            } catch (\Throwable $e) {
+
+                $this->getConnection()->rollBack();
+
+                throw $e;
+            };
+
+            //calling service for data
+
+            $response = (new RequestService())->call([
+                CURLOPT_URL => $rateSource->getUrl(),
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_RETURNTRANSFER => 1
             ]);
 
-            if (empty($dataSource)){
-                //TODO: if CALLED present - ok - if not maybe all services downed
-            }
-
+            var_dump($response);
 
 
         }

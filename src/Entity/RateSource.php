@@ -22,7 +22,7 @@ class RateSource
     /**
      * @ORM\Column(type="string")
      */
-    public $url;
+    protected $url;
 
     /**
      * @ORM\Column(type="string")
@@ -44,8 +44,18 @@ class RateSource
     /**
      * @ORM\Column(type="string")
      */
-    public $status;
+    protected $status;
 
 
+    public function setStatus($status)
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    public function getUrl()
+    {
+        return $this->url;
+    }
 
 }
