@@ -39,11 +39,7 @@ class GetDataService
 
         $lastRecord = $exchangeRateRepository->getLastRecord();
 
-        var_dump($lastRecord);
-
         if (empty($lastRecord)){ //TODO: add time criteria
-
-            //TODO: обернуть в транзакцию
 
             $this->getConnection()->beginTransaction();
 
@@ -54,7 +50,6 @@ class GetDataService
                 ]);
 
                 if (empty($rateSource)) {
-
                     //need to analyze do we have already called service or all services are downed
 
                     $this->getConnection()->rollBack();
@@ -68,7 +63,6 @@ class GetDataService
                 $this->getConnection()->commit();
 
             } catch (\Throwable $e) {
-
                 $this->getConnection()->rollBack();
 
                 throw $e;
@@ -112,6 +106,12 @@ class GetDataService
 
             } catch (\Exception $e) {
                 //TODO: handle situation if service downed
+
+                //unlock rateSource
+                $rateSource->setStatus('READY');
+                $this->manager->flush();
+
+
                 throw $e;
             }
 
