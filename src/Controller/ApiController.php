@@ -14,6 +14,7 @@ use App\Service\DataBaseServices\MySQLService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\Json;
 
 
 /**
@@ -37,13 +38,15 @@ class ApiController extends AbstractController {
                 return $this->render('index.html.twig');
             }
 
-            var_dump($currency);
+            $start = empty($begin) ? new DateTime() : new DateTime($begin);
 
-            var_dump($begin);
+            var_dump($start);
 
-            var_dump($end);
+            $finish = empty($end) ? new DateTime() : new DateTime($end);
 
+            var_dump($finish);
 
+            
             $mySQLservice = new MySQLService($this->getDoctrine());
 
             //$list = (new ExchangeRateRepository($mySQLservice))->getList();
@@ -62,7 +65,9 @@ class ApiController extends AbstractController {
             ]));
 
         } catch (\Throwable $e) {
-            die($e->getMessage());
+            return (new JsonResponse([
+                'error' => $e->getMessage()
+            ],500));
         }
     }
     
