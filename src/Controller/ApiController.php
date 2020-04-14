@@ -40,30 +40,18 @@ class ApiController extends AbstractController {
 
             $start = empty($begin) ? (new \DateTime())->modify('-1 day') : new \DateTime($begin);
 
-            var_dump($start);
-
             $finish = empty($end) ? new \DateTime() : new \DateTime($end);
-
-            var_dump($finish);
 
             $mySQLservice = new MySQLService($this->getDoctrine());
 
-            if (empty($curerncy)) {
+            if (empty($currency)) {
                 $currency = ['EUR','USD','RUB'];
             }
 
-            $list = (new ExchangeRateRepository($mySQLservice))->getList($start, $finish, $currency);
+            $list = (new ExchangeRateRepository($mySQLservice))->getList($start, $finish, $currency)->fetchAll();
 
             var_dump($list);
-
-            //$list = (new ExchangeRateRepository($mySQLservice))->getLastRecord();
-
-            //var_dump($list);
-
-            //$getDataService = $this->container->get(GetDataService::class);
-
-            //$result = $getDataService->checkActual($this->getParameter('delay_between_calls'));
-
+            
             return (new JsonResponse([
                 'status' => 'success',
                 'realCall' => $result
