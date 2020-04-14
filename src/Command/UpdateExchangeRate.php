@@ -50,11 +50,15 @@ class UpdateExchangeRate extends Command
 
         if ($loop > 0) {
             $this->getDataService->checkActual($delay);
-            echo "remains {$loop} loops";
-            usleep($delay * 1000000);
-            $this->callService($loop-1);
+            if ($loop > 1) {
+                echo "Data source called, remains {$loop} loops\n";
+                usleep($delay * 1000000);
+                $this->callService($loop - 1);
+            } else {
+                echo 'call done\n';
+            }
         } else {
-            echo 'loop completed';
+            echo 'loop completed\n';
         }
     }
 
