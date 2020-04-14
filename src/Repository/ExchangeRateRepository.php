@@ -31,7 +31,7 @@ class ExchangeRateRepository extends EntityRepository
         ",[],[],[
             RateSource::class,
             ExchangeRate::class
-        ])->fetchOne();
+        ])->fetch();
 
     }
 
