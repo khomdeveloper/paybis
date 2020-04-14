@@ -48,6 +48,10 @@ class ApiController extends AbstractController {
 
             $mySQLservice = new MySQLService($this->getDoctrine());
 
+            if (empty($curerncy)) {
+                $currency = ['EUR','USD','RUB'];
+            }
+
             $list = (new ExchangeRateRepository($mySQLservice))->getList($start, $finish, $currency);
 
             var_dump($list);
