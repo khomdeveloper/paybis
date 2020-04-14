@@ -37,4 +37,5 @@ services:
             $doctrine: '@doctrine'
 
     App\Service\WorkerControlService:
-        arguments: '@App\Service\DataBaseServices\MySQLService'
+        arguments:
+            $dataBaseService: '@App\Service\DataBaseServices\MySQLService'
