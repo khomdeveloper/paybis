@@ -11,7 +11,7 @@ class ExchangeRate implements MigrationSQLDeterminatorInterface
     {
         return "
                     CREATE TABLE `exchange_rate` (
-                      `id` int NOT NULL COMMENT 'Self incremental id' AUTO_INCREMENT PRIMARY KEY,
+                      `id` bigint NOT NULL COMMENT 'Self incremental id' AUTO_INCREMENT PRIMARY KEY,
                       `source_id` int(11) NOT NULL COMMENT 'Data source id',
                       `currency` varchar(255) COLLATE 'utf8_general_ci' NOT NULL COMMENT 'Currency',
                       `date` double NOT NULL DEFAULT 0 COMMENT 'Unix timestamp with microseconds when data was inserted',

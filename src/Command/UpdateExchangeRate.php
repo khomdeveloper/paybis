@@ -49,7 +49,7 @@ class UpdateExchangeRate extends Command
         $delay = $this->parameters->get('delay_between_calls');
 
         if ($loop > 0) {
-            $this->dataService->checkActual();
+            $this->getDataService->checkActual();
             echo "remains {$loop} loops";
             usleep($delay * 1000000);
             $this->callService($loop-1);
