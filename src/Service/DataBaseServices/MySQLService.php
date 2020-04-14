@@ -24,10 +24,8 @@ class MySQLService implements DataBaseServiceInterface
     public function executeRawSQL(string $sql, array $values = [], array $types = [], $autoMigration = null)
     {
         try {
-
             return $this->connection
                 ->executeQuery($sql, $values, $types);
-
         } catch (\Exception $e) {
             if (empty($autoMigration)){
                 throw $e;
@@ -39,7 +37,7 @@ class MySQLService implements DataBaseServiceInterface
                         (new AutoMigration($this, $migration))->condition($e)->up();
                     }
                 }
-                $this->executeRawSQL($sql, $values, $types); //run recursively without $autoMigration variable so we try to migrate once
+                return $this->executeRawSQL($sql, $values, $types); //run recursively without $autoMigration variable so we try to migrate once
             }
         }
     }

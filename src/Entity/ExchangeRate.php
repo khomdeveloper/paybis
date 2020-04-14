@@ -34,7 +34,7 @@ class ExchangeRate
     public $currency;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="double")
      */
     public $date;
 

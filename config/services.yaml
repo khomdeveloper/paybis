@@ -29,6 +29,5 @@ services:
     # please note that last definitions always *replace* previous ones
 
     App\Service\ClientServices\GetDataService:
-        public: true
         arguments:
             $doctrine : '@doctrine'
