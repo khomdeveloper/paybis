@@ -5,6 +5,7 @@ namespace App\Command;
 
 
 use App\Service\ClientServices\GetDataService;
+use App\Service\WorkerControlService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -20,11 +21,19 @@ class UpdateExchangeRate extends Command
 
     private $parameters;
 
-    public function __construct(string $name = null, GetDataService $getDataService, ParameterBagInterface $parameters)
+    private $workerControlService;
+
+    public function __construct(
+        string $name = null,
+        GetDataService $getDataService,
+        ParameterBagInterface $parameters,
+        WorkerControlService $workerControlService)
     {
         $this->getDataService = $getDataService;
 
         $this->parameters = $parameters;
+
+        $this->workerControlService = $workerControlService;
 
         parent::__construct($name);
     }
@@ -50,6 +59,12 @@ class UpdateExchangeRate extends Command
 
         if ($loop > 0) {
             $this->getDataService->checkActual($delay);
+
+            if ($this->workerControlService->needToStop()){
+                $output->writeln('terminated');
+                return;
+            }
+
             if ($loop > 1) {
                 $output->writeln("Data source called, remains {$loop} loops");
                 usleep($delay * 1000000);
