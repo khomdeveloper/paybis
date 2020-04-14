@@ -36,7 +36,7 @@ class RateSource
 
 
     /**
-     * @ORM\Column(type="double")
+     * @ORM\Column(type="float")
      */
     public $frequency;
 
