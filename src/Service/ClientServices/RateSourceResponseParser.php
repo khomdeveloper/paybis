@@ -41,8 +41,6 @@ class RateSourceResponseParser
                 ];
             }
 
-            var_dump($value);
-
             $sql = "
                     INSERT INTO `exchange_rate` 
                     (`source_id`,`currency`,`date`,`rate`)

@@ -39,7 +39,11 @@ class GetDataService
 
         $lastRecord = $exchangeRateRepository->getLastRecord();
 
-        if (empty($lastRecord)){ //TODO: add time criteria
+        if (!empty($lastRecord)) {
+            $expectedTimeToCall = $lastRecord->date + $actual_time;
+        }
+
+        if (empty($lastRecord) || microtime(true) > $expectedTimeToCall){
 
             $this->getConnection()->beginTransaction();
 
@@ -51,8 +55,15 @@ class GetDataService
 
                 if (empty($rateSource)) {
                     //need to analyze do we have already called service or all services are downed
-
                     $this->getConnection()->rollBack();
+
+                    $calledSource = $this->manager->getRepository(RateSource::class)->findOneBy([
+                        'status' => 'CALLED'
+                    ]);
+
+                    if (empty($calledSource)) {
+                        throw new \Exception('No services available');
+                    }
 
                     return true;
                 }
