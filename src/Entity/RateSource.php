@@ -27,6 +27,12 @@ class RateSource
     /**
      * @ORM\Column(type="string")
      */
+    protected $name;
+
+
+    /**
+     * @ORM\Column(type="string")
+     */
     public $method;
 
     /**
@@ -40,11 +46,20 @@ class RateSource
      */
     public $frequency;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $class;
 
     /**
      * @ORM\Column(type="string")
      */
     protected $status;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    public $down_counter;
 
 
     public function setStatus($status)
@@ -56,6 +71,11 @@ class RateSource
     public function getUrl()
     {
         return $this->url;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 
 }

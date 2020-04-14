@@ -60,10 +60,9 @@ class GetDataService
                     return true;
                 }
 
+                //lockRateSource
                 $rateSource->setStatus('CALLED');
-
                 $this->manager->flush();
-
                 $this->getConnection()->commit();
 
             } catch (\Throwable $e) {
@@ -73,9 +72,12 @@ class GetDataService
                 throw $e;
             };
 
-            //calling service for data
+
             try {
 
+                //TODO: analyze data in mysql source description
+
+                //calling service for data
                 $response = (new RequestService())->call([
                     CURLOPT_URL => $rateSource->getUrl(),
                     CURLOPT_TIMEOUT => 30,
@@ -86,13 +88,24 @@ class GetDataService
                     throw new RequestServiceException('Empty response');
                 }
 
-                $data = json_decode($response, true);
+                $this->getConnection()->beginTransaction();
+                try {
+                    $databaseService = new MySQLService($this->doctrine);
 
-                if (!is_array($data)) {
-                    throw new RequestServiceException('Wrong response format');
+                    (new RateSourceResponseParser($databaseService))
+                        ->parseAndSave($rateSource, $response);
+
+                    //unlock rateSource
+                    $rateSource->setStatus('READY');
+                    $this->manager->flush();
+                    $this->getConnection()->commit();
+
+                } catch (\Throwble $e) {
+                    $this->getConnection()->rollBack();
+                    throw $e;
                 }
 
-                var_dump($data);
+                return true;
 
             } catch (\Exception $e) {
                 //TODO: handle situation if service downed
@@ -102,9 +115,6 @@ class GetDataService
 
         }
 
-        //запрашиваем сервис
-        //сбрасываем флаг
-        //проставляем дату - сделать секунды с unixtimestamp
         //если сервис упал - добавляем число falldown
         //если этих falldown слишком много выключаем на время сервис
         //используем другой
