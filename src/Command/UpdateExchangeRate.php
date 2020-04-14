@@ -43,10 +43,18 @@ class UpdateExchangeRate extends Command
 
     }
 
-    protected function callService(GetDataService $dataService, int $loop = 1)
+    protected function callService(int $loop = 1)
     {
+
+        $delay = $this->parameters->get('delay_between_calls');
+
         if ($loop > 0) {
-            $dataService->checkActual();
+            $this->dataService->checkActual();
+            echo "remains {$loop} loops";
+            usleep($delay * 1000000);
+            $this->callService($loop-1);
+        } else {
+            echo 'loop completed';
         }
     }
 
@@ -63,9 +71,7 @@ class UpdateExchangeRate extends Command
             $output->writeln( ' once');
         }
 
-        $output->writeln($this->parameters->get('delay_between_calls'));
-
-        //$output->writeln(get_class($this->getDataService));
+        $this->callService(2);
 
         return 1;
 
