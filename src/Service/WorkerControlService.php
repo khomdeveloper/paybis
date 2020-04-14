@@ -25,17 +25,29 @@ class WorkerControlService
             WorkerControl::class
         ])->fetch();
 
-        var_dump($result);
+        if (!empty($result) && $result['count'] * 1 > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function startWorker()
     {
-        $this->dataBaseService->executeRawSQL("
+        if (!$this->checkWorker()) {
+
+            $this->dataBaseService->executeRawSQL("
             INSERT INTO `worker_control` (`process`,`status`)
             VALUES (1, 'LIVE')
-        ",[],[],[
-            WorkerControl::class
-        ]);
+        ", [], [], [
+                WorkerControl::class
+            ]);
+
+            return true;
+
+        } else {
+            return false;
+        }
     }
 
 

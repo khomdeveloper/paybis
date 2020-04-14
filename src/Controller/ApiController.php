@@ -37,9 +37,9 @@ class ApiController extends AbstractController {
 
             $mySQLservice = new MySQLService($this->getDoctrine());
 
-            (new WorkerControlService($mySQLservice))->startWorker();
+            $workerStatus = (new WorkerControlService($mySQLservice))->startWorker();
 
-            (new WorkerControlService($mySQLservice))->checkWorker();
+            var_dump($workerStatus);
 
             if (empty($currency) && empty($begin) && empty($end)){
                 return $this->render('index.html.twig');
@@ -53,17 +53,10 @@ class ApiController extends AbstractController {
                 $currency = ['EUR','USD','RUB'];
             }
 
-            var_dump($start);
-
-            var_dump($finish);
-
             $list = (new ExchangeRateRepository($mySQLservice))->getList($start, $finish, $currency)->fetchAll();
 
-            var_dump($list);
-
             return (new JsonResponse([
-                'status' => 'success',
-                'realCall' => $result
+                'result' => $list
             ]));
 
         } catch (\Throwable $e) {
