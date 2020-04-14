@@ -30,9 +30,13 @@ class ApiController extends AbstractController {
 
             //$list = (new ExchangeRateRepository($mySQLservice))->getList();
 
-            $list = (new ExchangeRateRepository($mySQLservice))->getLastRecord();
+            //$list = (new ExchangeRateRepository($mySQLservice))->getLastRecord();
 
-            var_dump($list);
+            //var_dump($list);
+
+            $getDataService = $this->container->get('App\Service\ClientServices\GetDataService');
+
+            var_dump($getDataService);
 
             return (new JsonResponse([
                 'status' => 'success'

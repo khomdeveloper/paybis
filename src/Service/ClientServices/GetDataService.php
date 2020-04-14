@@ -5,6 +5,9 @@ namespace App\Service\ClientServices;
 
 
 use App\Entity\ExchangeRate;
+use App\Entity\RateSource;
+use App\Repository\ExchangeRateRepository;
+use App\Service\DataBaseServices\MySQLService;
 use Doctrine\Persistence\ManagerRegistry;
 
 class GetDataService
@@ -24,10 +27,18 @@ class GetDataService
     public function checkActual()
     {
         //try to get last record from database
-        
+        $exchangeRateRepository = (new ExchangeRateRepository((new MySQLService($this->doctrine))));
 
-        //пытаемся получить последнюю запись из базы
-        //если ее вообще нет или ее дата обновления протухла
+        $lastRecord = $exchangeRateRepository->getLastRecord();
+
+        if (empty($lastRecord)){ //TODO: add time criteria
+            $dataSource = $this->manager->getRepository(RateSource::class)->findOneBy([
+               'status' => 'READY'
+            ])->fetch();
+
+            var_dump($dataSource);
+        }
+
         //если флаг called уже стоит ничего не делаем
         //ищем доступный сервис
         //запрашиваем сервис
