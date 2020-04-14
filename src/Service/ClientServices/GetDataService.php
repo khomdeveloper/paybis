@@ -34,7 +34,7 @@ class GetDataService
         if (empty($lastRecord)){ //TODO: add time criteria
             $dataSource = $this->manager->getRepository(RateSource::class)->findOneBy([
                'status' => 'READY'
-            ])->fetch();
+            ]);
 
             var_dump($dataSource);
 
