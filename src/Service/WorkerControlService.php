@@ -51,6 +51,23 @@ class WorkerControlService
     }
 
 
+    public function needToStop()
+    {
+
+        $result = $this->dataBaseService->executeRawSQL("
+            SELECT 'status' as `count` FROM `worker_control`
+        ",[],[],[
+            WorkerControl::class
+        ])->fetch();
+
+        if (!empty($result) && $result['status'] == 'DEAD') {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 
 
 

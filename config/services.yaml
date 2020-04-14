@@ -31,3 +31,10 @@ services:
     App\Service\ClientServices\GetDataService:
         arguments:
             $doctrine : '@doctrine'
+
+    App\Service\DataBaseServices\MySQLService:
+        arguments:
+            $doctrine: '@doctrine'
+
+    App\Service\WorkerControlService:
+        arguments: '@App\Service\DataBaseServices\MySQLService'
