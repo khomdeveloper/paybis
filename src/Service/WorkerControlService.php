@@ -20,7 +20,8 @@ class WorkerControlService
     public function checkWorker()
     {
         $result = $this->dataBaseService->executeRawSQL("
-            SELECT count(*) as `count` FROM `worker_control`
+            SELECT count(*) as `count` 
+            FROM `worker_control`
         ",[],[],[
             WorkerControl::class
         ])->fetch();
@@ -43,11 +44,39 @@ class WorkerControlService
                 WorkerControl::class
             ]);
 
+            /*
+            $cmd = "php bin/console app:updateExchangeRate --loop=20 > /dev/null 2>/dev/null &";
+            shell_exec($cmd);*/
+
             return true;
 
         } else {
             return false;
         }
+    }
+
+
+    public function stopWorker()
+    {
+
+        $result = $this->dataBaseService->executeRawSQL("
+            SELECT `id` as `count` 
+            FROM `worker_control`
+        ",[],[],[
+            WorkerControl::class
+        ])->fetch();
+
+        if (!empty($result) && isset($result['id'])) {
+
+            $this->dataBaseService->executeRawSQL("
+               DELETE FROM `worker_control`
+               WHERE `id` = :id LIMIT 1  
+            ", [
+                'id' => $result['id']
+            ]);
+
+        }
+
     }
 
 

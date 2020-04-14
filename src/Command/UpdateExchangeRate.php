@@ -62,6 +62,9 @@ class UpdateExchangeRate extends Command
 
             if ($this->workerControlService->needToStop()){
                 $output->writeln('terminated');
+
+                $this->workerControlService->stopWorker();
+
                 return;
             }
 
