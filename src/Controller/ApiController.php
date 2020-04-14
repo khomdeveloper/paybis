@@ -11,6 +11,7 @@ namespace App\Controller;
 use App\Repository\ExchangeRateRepository;
 use App\Service\ClientServices\GetDataService;
 use App\Service\DataBaseServices\MySQLService;
+use App\Service\WorkerControlService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,6 +35,12 @@ class ApiController extends AbstractController {
 
             $end = $request->get('end');
 
+            $mySQLservice = new MySQLService($this->getDoctrine());
+
+            (new WorkerControlService($mySQLservice))->startWorker();
+
+            (new WorkerControlService($mySQLservice))->checkWorker();
+
             if (empty($currency) && empty($begin) && empty($end)){
                 return $this->render('index.html.twig');
             }
@@ -41,8 +48,6 @@ class ApiController extends AbstractController {
             $start = empty($begin) ? (new \DateTime())->modify('-1 day') : new \DateTime($begin);
 
             $finish = empty($end) ? new \DateTime() : new \DateTime($end);
-
-            $mySQLservice = new MySQLService($this->getDoctrine());
 
             if (empty($currency)) {
                 $currency = ['EUR','USD','RUB'];
