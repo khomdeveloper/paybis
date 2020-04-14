@@ -22,17 +22,14 @@ class ExchangeRateRepository extends EntityRepository
 
     public function getLastRecord(): array
     {
-        $entityManager = $this->getEntityManager();
+        return $this->dataBaseService->executeRawSQL("
+            SELECT *
+            FROM `exchange_rate`
+            WHERE `id` > 0
+            ORDER BY `id` DESC
+            LIMIT 1
+        ")->fetchAll();
 
-        $query = $entityManager->createQuery("
-            SELECT p
-            FROM App\Entity\ExchangeRate p
-            WHERE p.id > 0
-            ORDER BY p.id DESC
-        ")->setMaxResults(1);
-
-        // returns an array of Product objects
-        return $query->getResult();
     }
 
     public function getList()
