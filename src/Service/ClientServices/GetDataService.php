@@ -40,6 +40,7 @@ class GetDataService
         $lastRecord = $exchangeRateRepository->getLastRecord();
 
         if (!empty($lastRecord)) {
+            var_dump($lastRecord);
             $expectedTimeToCall = $lastRecord->date + $delayBetweenCalls;
         }
 

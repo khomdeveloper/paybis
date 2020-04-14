@@ -71,7 +71,7 @@ class UpdateExchangeRate extends Command
             $output->writeln( ' once');
         }
 
-        $this->callService(2);
+        $this->callService($loop ?: 1);
 
         return 1;
 
