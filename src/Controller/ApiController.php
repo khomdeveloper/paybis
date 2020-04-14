@@ -28,7 +28,9 @@ class ApiController extends AbstractController {
 
             $mySQLservice = new MySQLService($this->getDoctrine());
 
-            $list = (new ExchangeRateRepository($mySQLservice))->getList();
+            //$list = (new ExchangeRateRepository($mySQLservice))->getList();
+
+            $list = (new ExchangeRateRepository($mySQLservice))->getLastRecord();
 
             var_dump($list);
 

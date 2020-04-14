@@ -20,6 +20,21 @@ class ExchangeRateRepository extends EntityRepository
         $this->dataBaseService = $dataBaseSerivce;
     }
 
+    public function getLastRecord(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery("
+            SELECT p
+            FROM App\Entity\ExchangeRate p
+            WHERE p.id > 0
+            ORDER BY p.id DESC
+        ")->setMaxResults(1);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
     public function getList()
     {
         //здесь добавить вызов из кеша редиса по запросу
