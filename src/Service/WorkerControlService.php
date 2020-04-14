@@ -20,7 +20,7 @@ class WorkerControlService
     public function checkWorker()
     {
         $result = $this->dataBaseService->executeRawSQL("
-            SELECT `status` FROM `worker_control`
+            SELECT count(*) as `count` FROM `worker_control`
         ",[],[],[
             WorkerControl::class
         ])->fetch();
