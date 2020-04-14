@@ -66,13 +66,16 @@ class WorkerControlService
             WorkerControl::class
         ])->fetch();
 
+
         if (!empty($result) && isset($result['id'])) {
 
             $this->dataBaseService->executeRawSQL("
                DELETE FROM `worker_control`
-               WHERE `id` = :id LIMIT 1  
+               WHERE `id` = :id   
             ", [
                 'id' => $result['id']
+            ], [
+                'id' => \PDO::PARAM_STR
             ]);
 
         }
