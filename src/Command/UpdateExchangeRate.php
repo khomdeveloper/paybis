@@ -30,16 +30,18 @@ class UpdateExchangeRate extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Command started');
+        $output->write('Command started');
 
         $loop = false;
 
         if ($input->hasOption('mode') && $input->getOption('mode') == 'infinity'){
-            $output->write( ' in infinity loop mode');
+            $output->write( ' in infinity loop mode at ');
             $loop = true;
         } else {
-            $output->write( ' once');
+            $output->write( ' once at ');
         }
+
+        return 1;
 
     }
 
