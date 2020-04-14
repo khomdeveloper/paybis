@@ -39,6 +39,8 @@ class ApiController extends AbstractController {
 
             $workerStatus = (new WorkerControlService($mySQLservice))->startWorker();
 
+            (new WorkerControlService($mySQLservice))->needToStop();
+
             var_dump($workerStatus);
 
             if (empty($currency) && empty($begin) && empty($end)){

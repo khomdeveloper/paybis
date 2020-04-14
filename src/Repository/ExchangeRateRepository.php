@@ -45,12 +45,7 @@ class ExchangeRateRepository extends EntityRepository
 
         $end = min($now, $finish->getTimestamp());
         $begin = min($end, $start->getTimestamp());
-
-        var_dump($begin);
-
-        var_dump($end);
-
-        var_dump($currency);
+        
 
         //TODO: add here redis cache
 
