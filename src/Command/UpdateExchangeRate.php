@@ -64,12 +64,14 @@ class UpdateExchangeRate extends Command
 
         $loop = false;
 
-        if ($input->hasOption('mode') && $input->getOption('loop')*1 > 0){
+        if ($input->hasOption('loop') && $input->getOption('loop')*1 > 0){
             $output->writeln( ' in loop mode');
             $loop = $input->getOption('loop')*1;
         } else {
             $output->writeln( ' once');
         }
+
+        //$output->writeln($loop);
 
         $this->callService($loop ?: 1);
 
