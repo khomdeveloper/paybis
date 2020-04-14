@@ -65,7 +65,7 @@ class WorkerControlService
         ",[],[],[
             WorkerControl::class
         ])->fetch();
-        
+
         if (!empty($result) && isset($result['id'])) {
 
             $this->dataBaseService->executeRawSQL("
