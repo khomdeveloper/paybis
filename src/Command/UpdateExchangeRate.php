@@ -43,10 +43,11 @@ class UpdateExchangeRate extends Command
 
     }
 
-    protected function callService(GetDataService $dataService, integer $loop = 1)
+    protected function callService(GetDataService $dataService, int $loop = 1)
     {
-        if ($loop > 0)
-        $dataService->checkActual();
+        if ($loop > 0) {
+            $dataService->checkActual();
+        }
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
