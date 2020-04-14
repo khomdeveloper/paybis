@@ -60,13 +60,12 @@ class WorkerControlService
     {
 
         $result = $this->dataBaseService->executeRawSQL("
-            SELECT `id` as `count` 
+            SELECT `id` 
             FROM `worker_control`
         ",[],[],[
             WorkerControl::class
         ])->fetch();
-
-
+        
         if (!empty($result) && isset($result['id'])) {
 
             $this->dataBaseService->executeRawSQL("
