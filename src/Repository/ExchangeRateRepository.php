@@ -20,7 +20,7 @@ class ExchangeRateRepository extends EntityRepository
         $this->dataBaseService = $dataBaseSerivce;
     }
 
-    public function getLastRecord(): array
+    public function getLastRecord()
     {
         return $this->dataBaseService->executeRawSQL("
             SELECT *
